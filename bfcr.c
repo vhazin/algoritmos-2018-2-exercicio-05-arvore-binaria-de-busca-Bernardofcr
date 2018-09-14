@@ -16,17 +16,17 @@ typedef struct no{
     struct no *origem;
 }No;
 
-struct no *criarArvore(int add){
+struct no *criarArvore(int add,No *esq, No *dir){
     No *raiz=malloc(sizeof(No));
     raiz->id=add;
-    raiz->esquerda=NULL;
-    raiz->direita=NULL;
+    raiz->esquerda=esq;
+    raiz->direita=dir;
     return raiz;
 }
 
 struct no *addArvore (No *arv, int add){
     if (arv==NULL){
-        arv=criarArvore(add);
+        arv=criarArvore(add,NULL,NULL);
     }else if(add<arv->id){
         arv->esquerda=addArvore(arv->esquerda,add);
         arv->esquerda->origem=arv;
@@ -37,14 +37,14 @@ struct no *addArvore (No *arv, int add){
     return arv;
 }
 void preOrdem(struct no *arv){
-    if (((arv->id)=!NULL)){
+    if (arv!=NULL){
         printf(" %d",arv->id);
         preOrdem(arv->esquerda);
         preOrdem(arv->direita);
     }
 }
 void inOrdem(No *arv){
-    if ((arv->id=!NULL)){
+    if (arv!=NULL){
         inOrdem(arv->esquerda);
         printf(" %d",arv->id);
         inOrdem(arv->direita);
@@ -58,13 +58,12 @@ void posOrdem(No *arv){
     }
 }
 
-int main() {
-    int c,i=0,j=0,add = 0;
+int main(void) {
+    int c,i=0,j=0,add=0;
     scanf("%d",&c);
     int n[c];
     No *arvore[c];
     while (i<c){
-        arvore[i]=malloc(sizeof(No));
         scanf("%d",&n[i]);
         while(j<n[i]){
             scanf("%d",&add);
@@ -76,7 +75,8 @@ int main() {
     }
     i=0;
     while (i<c){
-        printf("Pre.:");
+        printf("Case %d: ",(i+1));
+        printf("\nPre.:");
         preOrdem(arvore[i]);
         printf("\nIn..:");
         inOrdem(arvore[i]);
@@ -85,7 +85,5 @@ int main() {
         printf("\n\n");
         i++;
     }
-    
-    
     return 0;
 }
