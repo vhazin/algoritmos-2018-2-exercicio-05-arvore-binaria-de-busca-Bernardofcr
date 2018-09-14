@@ -75,7 +75,7 @@ int main(void) {
     }
     i=0;
     while (i<c){
-        printf("Case %d: ",(i+1));
+        printf("Case %d:",(i+1));
         printf("\nPre.:");
         preOrdem(arvore[i]);
         printf("\nIn..:");
